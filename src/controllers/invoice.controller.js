@@ -66,7 +66,24 @@ invoiceCtrl.getInvoiceProducts = async (req, res) => {
       res.json(result)
     })
   } catch (error) {
-
+    res.status(500).json({
+      message: error
+    })
   }
 }
+
+invoiceCtrl.getInvoiceProductsPerId = async (req, res) => {
+  try {
+    connection.query(`SELECT * FROM invoice_product WHERE invoiceId = ${req.params.id}`, (error, result) => {
+      if (error) throw error
+
+      res.json(result)
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    })
+  }
+}
+
 module.exports = invoiceCtrl
